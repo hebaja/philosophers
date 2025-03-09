@@ -67,14 +67,6 @@ int	build_forks(t_table *table)
 	pthread_mutex_t	*forks;
 
 	i = -1;
-	if (pthread_mutex_init(&table->is_dead_key, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&table->is_eating_key, NULL) != 0)
-		/* TODO need to check if destroy key case error above */
-		return (0);
-	if (pthread_mutex_init(&table->printing_key, NULL) != 0)
-		/* TODO need to check if destroy key case error above */
-		return (0);
 	forks = (pthread_mutex_t *)malloc(
 		sizeof(pthread_mutex_t) * table->nbr_philos);
 	if (!forks)
@@ -84,5 +76,23 @@ int	build_forks(t_table *table)
 		/* TODO need to check if destroy key case error above */
 			return (0);
 	table->forks = forks;
+	return (1);
+}
+
+int	build_keys(t_table *table)
+{
+	if (pthread_mutex_init(&table->is_dead_key, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&table->is_eating_key, NULL) != 0)
+	{
+		/* TODO need to check if destroy key case error above */
+		return (0);
+	}
+	if (pthread_mutex_init(&table->printing_key, NULL) != 0)
+	{
+		/* TODO need to check if destroy key case error above */
+		return (0);
+	}
+	build_forks(table);
 	return (1);
 }

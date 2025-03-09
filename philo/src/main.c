@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 			return (EXIT_FAILURE);
 		table.nbr_philos = ft_atoi(argv[1]);
 		table.is_dead_flag = 0;
-		if(!build_forks(&table) || !build_philos(&table, argv))
+		if(!build_keys(&table) || !build_philos(&table, argv))
 		{
 			write(2, "Error building table\n", 21);
 			/* TODO check cleaning and destroing here */

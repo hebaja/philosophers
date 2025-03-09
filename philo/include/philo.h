@@ -44,7 +44,7 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		validate_input_args(char **args);
 int		build_philos(t_table *table, char **args);
-int		build_forks(t_table *table);
+int		build_keys(t_table *table);
 void	*monitor(void *table_ptr);
 void	*philo_routine(void *philo_ptr);
 void	init_table(t_table *table);
