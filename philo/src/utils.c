@@ -67,13 +67,13 @@ int	philos_alive(t_philo *philo)
 	return (res);
 }
 
-/* TODO Maybe check for dead philos here */
 void	print_msg(char *str, t_philo *philo)
 {
 	size_t	time;
 
 	time = get_current_time() - philo->start_time; 
 	pthread_mutex_lock(philo->printing_key);
-	printf("%lu %lu %s - meals = %lu, dead = %d\n", time, philo->id, str, philo->meals_had, philo->dead);
+	printf("%lu %lu %s - meals = %lu, dead = %d\n", 
+		time, philo->id, str, philo->meals_had, philo->dead);
 	pthread_mutex_unlock(philo->printing_key);
 }

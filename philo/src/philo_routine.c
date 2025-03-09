@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-#include <pthread.h>
 
 void	release_forks(t_philo *philo, int is_both)
 {
@@ -77,12 +76,14 @@ void	*philo_routine(void *philo_ptr)
 	philo = (t_philo *)philo_ptr;
 	while (philos_alive(philo))
 	{
-		if (!philos_alive(philo) || (philo->nbr_times_to_eat != 0 && philo->meals_had >= philo->nbr_times_to_eat))
+		if (!philos_alive(philo)
+			|| (philo->nbr_times_to_eat != 0
+			&& philo->meals_had >= philo->nbr_times_to_eat))
 			break ;
 		if (philo->id % 2 == 0)
 			usleep(10);
 		if (!philos_alive(philo))
-            break;
+            break ;
 		if (!philo_eat(philo))
 			break ;
 		if (!philo_sleep(philo))

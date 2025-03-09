@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 		if(!build_keys(&table) || !build_philos(&table, argv))
 		{
 			write(2, "Error building table\n", 21);
-			/* TODO check cleaning and destroing here */
 			return (EXIT_FAILURE);
 		}
 		init_table(&table);

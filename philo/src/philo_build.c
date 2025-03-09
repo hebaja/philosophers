@@ -77,6 +77,7 @@ int	build_forks(t_table *table)
 		{
 			while(--i >= 0)
 				pthread_mutex_destroy(&forks[i]);
+			free(forks);
 			return (0);
 		}
 	table->forks = forks;
