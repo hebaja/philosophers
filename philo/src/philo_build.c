@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+#include <pthread.h>
 
 void	set_add_data(int i, t_philo *philos, t_table *table, char **args)
 {
@@ -73,8 +74,11 @@ int	build_forks(t_table *table)
 		return (0);
 	while (++i < table->nbr_philos)
 		if (pthread_mutex_init(&forks[i], NULL) != 0)
-		/* TODO need to check if destroy key case error above */
+		{
+			while(--i >= 0)
+				pthread_mutex_destroy(&forks[i]);
 			return (0);
+		}
 	table->forks = forks;
 	return (1);
 }
@@ -85,14 +89,21 @@ int	build_keys(t_table *table)
 		return (0);
 	if (pthread_mutex_init(&table->is_eating_key, NULL) != 0)
 	{
-		/* TODO need to check if destroy key case error above */
+		pthread_mutex_destroy(&table->is_dead_key);
 		return (0);
 	}
 	if (pthread_mutex_init(&table->printing_key, NULL) != 0)
 	{
-		/* TODO need to check if destroy key case error above */
+		pthread_mutex_destroy(&table->is_dead_key);
+		pthread_mutex_destroy(&table->is_eating_key);
 		return (0);
 	}
-	build_forks(table);
+	if (!build_forks(table))
+	{
+		pthread_mutex_destroy(&table->is_dead_key);
+		pthread_mutex_destroy(&table->is_eating_key);
+		pthread_mutex_destroy(&table->printing_key);
+		return (0);
+	}
 	return (1);
 }
