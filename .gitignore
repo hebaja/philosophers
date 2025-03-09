@@ -1,0 +1,5 @@
+philo/philo
+*.swp
+*.out
+*.o
+*.a
