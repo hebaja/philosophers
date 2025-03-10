@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:12:18 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 16:13:05 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:29:47 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-size_t  get_current_time(void)
+size_t	get_current_time(void)
 {
-	struct timeval  time;
+	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
 		perror("gettimeofday() error");
@@ -71,9 +71,9 @@ void	print_msg(char *str, t_philo *philo)
 {
 	size_t	time;
 
-	time = get_current_time() - philo->start_time; 
+	time = get_current_time() - philo->start_time;
 	pthread_mutex_lock(philo->printing_key);
-	printf("%lu %lu %s - meals = %lu, dead = %d\n", 
+	printf("%lu %lu %s - meals = %lu, dead = %d\n",
 		time, philo->id, str, philo->meals_had, philo->dead);
 	pthread_mutex_unlock(philo->printing_key);
 }

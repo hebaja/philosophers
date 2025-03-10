@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:12:05 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 16:12:07 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:40:56 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	set_add_data(int i, t_philo *philos, t_table *table, char **args)
 	philos[i].time_to_eat = ft_atoi(args[3]);
 	philos[i].time_to_sleep = ft_atoi(args[4]);
 	philos[i].start_time = get_current_time();
-	philos[i].last_time_ate = get_current_time();	
+	philos[i].last_time_ate = get_current_time();
 	if (args[5])
 		philos[i].nbr_times_to_eat = ft_atoi(args[5]);
 	else
@@ -40,7 +40,7 @@ int	build_philos(t_table *table, char **args)
 {
 	int			i;
 	t_philo		*philos;
-	
+
 	i = -1;
 	philos = (t_philo *)malloc(sizeof(t_philo) * table->nbr_philos);
 	if (!philos)
@@ -69,17 +69,19 @@ int	build_forks(t_table *table)
 
 	i = -1;
 	forks = (pthread_mutex_t *)malloc(
-		sizeof(pthread_mutex_t) * table->nbr_philos);
+			sizeof(pthread_mutex_t) * table->nbr_philos);
 	if (!forks)
 		return (0);
 	while (++i < table->nbr_philos)
+	{
 		if (pthread_mutex_init(&forks[i], NULL) != 0)
 		{
-			while(--i >= 0)
+			while (--i >= 0)
 				pthread_mutex_destroy(&forks[i]);
 			free(forks);
 			return (0);
 		}
+	}
 	table->forks = forks;
 	return (1);
 }

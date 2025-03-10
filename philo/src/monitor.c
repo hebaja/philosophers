@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:11:49 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 16:11:51 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:35:09 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	philos_ate_enough(t_philo *philos)
 		}
 	}
 	return (1);
-} 
+}
 
 int	philo_dead(t_philo *philo)
 {
@@ -36,8 +36,8 @@ int	philo_dead(t_philo *philo)
 
 	pthread_mutex_lock(philo->is_eating_key);
 	current_time = get_current_time();
-	if (current_time - philo->last_time_ate >= 
-		philo->time_to_die && philo->is_eating == 0)
+	if (current_time - philo->last_time_ate
+		>= philo->time_to_die && philo->is_eating == 0)
 	{
 		pthread_mutex_unlock(philo->is_eating_key);
 		return (1);

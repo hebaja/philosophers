@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:11:57 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 16:11:58 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:31:14 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 			return (EXIT_FAILURE);
 		table.nbr_philos = ft_atoi(argv[1]);
 		table.is_dead_flag = 0;
-		if(!build_keys(&table) || !build_philos(&table, argv))
+		if (!build_keys(&table) || !build_philos(&table, argv))
 		{
 			write(2, "Error building table\n", 21);
 			return (EXIT_FAILURE);
