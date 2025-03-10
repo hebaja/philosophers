@@ -1,0 +1,29 @@
+Basic Tests
+./a.out 1 800 200 200 – Single philosopher.
+./a.out 2 800 200 200 – Two philosophers to test minimal interaction.
+./a.out 5 800 200 200 – Classic five philosophers problem.
+./a.out 8 1000000 1000000 1000000 – Large values to ensure stability.
+./a.out 4 600 200 200 3 – Limited number of meals.
+
+Edge Cases
+./a.out 1 100000 100000 100000 1 – Single philosopher eating once.
+./a.out 2 100000 50000 50000 2 – Two philosophers eating twice.
+./a.out 3 200 100 100 – Philosophers might starve if time is too short.
+./a.out 3 300 150 150 – Philosophers should just barely survive.
+./a.out 5 150 100 100 – Philosophers might start dying.
+
+Performance Tests
+./a.out 10 5000 2000 2000 – Medium number of philosophers with reasonable timings.
+./a.out 50 800 200 200 – 50 philosophers to test high concurrency.
+./a.out 100 800 200 200 – Stress test with 100 philosophers.
+./a.out 200 1000 500 500 – Extremely high concurrency.
+./a.out 500 5000 2000 2000 3 – Large-scale test with limited meals.
+
+Extremely High Time Values
+./a.out 4 2147483647 1000000 1000000 – Max int for time_to_die.
+./a.out 10 10000000 5000000 5000000 – Large values but within range.
+./a.out 20 500000000 100000000 100000000 – Stress test with long survival.
+
+Low Time Values
+./a.out 3 10 5 5 – Philosophers should die instantly.
+./a.out 3 50 20 20 – Likely to cause starvation due to lack of time.
