@@ -19,13 +19,10 @@ int	philos_ate_enough(t_philo *philos)
 
 	i = -1;
 	nbr_philos = philos[0].nbr_philos;
-	if (philos[0].nbr_times_to_eat != 0)
+	while (++i < nbr_philos)
 	{
-		while (++i < nbr_philos)
-		{
-			if (philos[i].meals_had < philos->nbr_times_to_eat)
-				return (0);
-		}
+		if (philos[i].meals_had < philos->nbr_times_to_eat)
+			return (0);
 	}
 	return (1);
 }
@@ -56,10 +53,14 @@ int	dead_monitor(t_philo *philos)
 		if (philo_dead(&philos[i]))
 		{
 			print_msg("died", &philos[i]);
+
+
 			pthread_mutex_lock(philos[i].is_dead_key);
 			*philos[i].is_dead = 1;
 			philos[i].dead = 1;
 			pthread_mutex_unlock(philos[i].is_dead_key);
+
+
 			return (1);
 		}
 	}
@@ -73,8 +74,15 @@ void	*monitor(void *table_ptr)
 	table = (t_table *)table_ptr;
 	while (1)
 	{
-		if (philos_ate_enough(table->philos) || dead_monitor(table->philos))
+		// if (table->philos[0].nbr_times_to_eat != 0)
+		// 	if (philos_ate_enough(table->philos))
+		// 		break ;
+		if (dead_monitor(table->philos))
+		{
+			printf("died\n");
 			break ;
+		}
 	}
+			printf("monitor end\n");
 	return (NULL);
 }

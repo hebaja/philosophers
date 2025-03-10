@@ -62,3 +62,7 @@ int		validate_input_args(char **args);
 int		build_philos(t_table *table, char **args);
 int		build_keys(t_table *table);
 int		philos_alive(t_philo *philo);
+int		philo_sleep(t_philo *philo);
+int		philo_think(t_philo *philo);
+int		philo_eat(t_philo *philo);
+void	improved_sleep(size_t millis);

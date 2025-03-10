@@ -55,16 +55,13 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-int	philos_alive(t_philo *philo)
+void	improved_sleep(size_t millis)
 {
-	int	res;
+	size_t	start;
 
-	res = 1;
-	pthread_mutex_lock(philo->is_dead_key);
-	if (*philo->is_dead)
-		res = 0;
-	pthread_mutex_unlock(philo->is_dead_key);
-	return (res);
+	start = get_current_time();
+	while (get_current_time() - start < millis)
+		usleep(500);
 }
 
 void	print_msg(char *str, t_philo *philo)

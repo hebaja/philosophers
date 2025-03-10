@@ -28,6 +28,9 @@ void	init_table(t_table *table)
 	i = -1;
 	while (++i < table->nbr_philos)
 		pthread_mutex_destroy(&table->forks[i]);
+
+	printf("table_end\n");
+
 	pthread_mutex_destroy(&table->is_dead_key);
 	pthread_mutex_destroy(&table->is_eating_key);
 	pthread_mutex_destroy(&table->printing_key);
