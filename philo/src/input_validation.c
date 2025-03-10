@@ -31,11 +31,11 @@ int	validate_input_args(char **args)
 	if (ft_atoi(args[1]) <= 0 || !is_valid_args(args[1]))
 		write(2, "Invalid number of philosophers\n", 31);
 	else if (ft_atoi(args[2]) <= 0 || !is_valid_args(args[2]))
-		write(2, "Invalid time do die\n", 20);
+		write(2, "Invalid time to die\n", 20);
 	else if (ft_atoi(args[3]) <= 0 || !is_valid_args(args[3]))
-		write(2, "Invalid time do eat\n", 20);
+		write(2, "Invalid time to eat\n", 20);
 	else if (ft_atoi(args[4]) <= 0 || !is_valid_args(args[4]))
-		write(2, "Invalid time do sleep\n", 22);
+		write(2, "Invalid time to sleep\n", 22);
 	else if (args[5] && (ft_atoi(args[5]) <= 0 || !is_valid_args(args[5])))
 		write(2, "Invalid number of times philosophers must eat\n", 46);
 	else
