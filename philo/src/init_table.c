@@ -6,11 +6,20 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:11:20 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 16:11:24 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/10 23:21:06 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+void	clean(t_table *table)
+{
+	pthread_mutex_destroy(&table->is_dead_key);
+	pthread_mutex_destroy(&table->is_eating_key);
+	pthread_mutex_destroy(&table->printing_key);
+	free(table->philos);
+	free(table->forks);
+}
 
 void	init_table(t_table *table)
 {
@@ -28,12 +37,5 @@ void	init_table(t_table *table)
 	i = -1;
 	while (++i < table->nbr_philos)
 		pthread_mutex_destroy(&table->forks[i]);
-
-	printf("table_end\n");
-
-	pthread_mutex_destroy(&table->is_dead_key);
-	pthread_mutex_destroy(&table->is_eating_key);
-	pthread_mutex_destroy(&table->printing_key);
-	free(table->philos);
-	free(table->forks);
+	clean(table);
 }

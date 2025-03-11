@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:11:49 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 20:35:09 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/10 23:30:43 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,11 @@ int	dead_monitor(t_philo *philos)
 	{
 		if (philo_dead(&philos[i]))
 		{
-			print_msg("died", &philos[i]);
-
-
 			pthread_mutex_lock(philos[i].is_dead_key);
 			*philos[i].is_dead = 1;
 			philos[i].dead = 1;
 			pthread_mutex_unlock(philos[i].is_dead_key);
-
-
+			print_msg("died", &philos[i]);
 			return (1);
 		}
 	}
@@ -74,15 +70,11 @@ void	*monitor(void *table_ptr)
 	table = (t_table *)table_ptr;
 	while (1)
 	{
-		// if (table->philos[0].nbr_times_to_eat != 0)
-		// 	if (philos_ate_enough(table->philos))
-		// 		break ;
+		if (table->philos[0].nbr_times_to_eat != 0)
+		 	if (philos_ate_enough(table->philos))
+		 		break ;
 		if (dead_monitor(table->philos))
-		{
-			printf("died\n");
 			break ;
-		}
 	}
-			printf("monitor end\n");
 	return (NULL);
 }

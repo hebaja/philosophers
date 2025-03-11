@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 20:41:33 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 21:28:53 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:56:40 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ int		philos_alive(t_philo *philo);
 int		philo_sleep(t_philo *philo);
 int		philo_think(t_philo *philo);
 int		philo_eat(t_philo *philo);
-void	improved_sleep(size_t millis);
+void		improved_usleep(size_t millis, t_philo *philo);
+void		clean(t_table *table);

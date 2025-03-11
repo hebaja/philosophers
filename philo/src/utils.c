@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:12:18 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 20:29:47 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:57:20 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,17 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void	improved_sleep(size_t millis)
+void	improved_usleep(size_t millis, t_philo *philo)
 {
 	size_t	start;
 
 	start = get_current_time();
 	while (get_current_time() - start < millis)
+	{
+		if (*philo->is_dead)
+			break ;
 		usleep(500);
+	}
 }
 
 void	print_msg(char *str, t_philo *philo)
