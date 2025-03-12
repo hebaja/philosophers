@@ -51,4 +51,5 @@ void	print_msg(char *str, t_philo *philo)
 	printf("%lu %lu %s\n", time, philo->id, str);
 	pthread_mutex_unlock(philo->is_dead_key);
 	pthread_mutex_unlock(philo->printing_key);
+
 }
