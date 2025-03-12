@@ -51,8 +51,7 @@ int	build_philos(t_table *table, char **args)
 		philos[i].nbr_philos = table->nbr_philos;
 		philos[i].meals_had = 0;
 		philos[i].is_eating = 0;
-		philos[i].is_dead = 0;
-		philos[i].is_dead = &table->is_dead_flag;
+		philos[i].a_dead_philo = &table->is_dead_flag;
 		philos[i].is_dead_key = &table->is_dead_key;
 		philos[i].is_eating_key = &table->is_eating_key;
 		philos[i].printing_key = &table->printing_key;

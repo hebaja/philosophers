@@ -24,6 +24,7 @@ int	philos_ate_enough(t_philo *philos)
 		if (philos[i].meals_had < philos->nbr_times_to_eat)
 			return (0);
 	}
+	i = -1;
 	return (1);
 }
 
@@ -53,10 +54,11 @@ int	dead_monitor(t_philo *philos)
 		if (philo_dead(&philos[i]))
 		{
 			pthread_mutex_lock(philos[i].is_dead_key);
-			*philos[i].is_dead = 1;
+			*philos[i].a_dead_philo = 1;
 			philos[i].dead = 1;
 			pthread_mutex_unlock(philos[i].is_dead_key);
 			print_msg("died", &philos[i]);
+			printf("at %lu - last meal: %lu\n", get_current_time() - philos[i].start_time, philos[i].last_time_ate - philos[i].start_time);
 			return (1);
 		}
 	}

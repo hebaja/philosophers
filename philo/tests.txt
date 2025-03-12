@@ -32,3 +32,7 @@ also use dead_mutex in print_msg.
 collect sum of all meals had - verify case max meals passed.
 check random dying cases.
 rethink some variable names.
+
+test 5 800 200 200 - philosophers shouldn't die but someone dies sometimes
+test 5 800 200 200 7 - philosophers shouldn't die but someone dies sometimes
+test 4 410 200 200 - philosophers shouldn't die but someone dies sometimes

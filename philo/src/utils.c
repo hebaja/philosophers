@@ -12,33 +12,6 @@
 
 #include "../include/philo.h"
 
-int	ft_atoi(const char *str)
-{
-	int	sign;
-	int	res;
-
-	sign = 1;
-	res = 0;
-	if (*str)
-	{
-		while (*str == ' ' || *str == '\t' || *str == '\v'
-			|| *str == '\r' || *str == '\n' || *str == '\f')
-			str++;
-		if (*str == '+' || *str == '-')
-		{
-			if (*str == '-')
-				sign = -1;
-			str++;
-		}
-		while (*str >= '0' && *str <= '9')
-		{
-			res = res * 10 + (*str - 48);
-			str++;
-		}
-	}
-	return (res * sign);
-}
-
 int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
@@ -62,7 +35,7 @@ void	improved_usleep(size_t millis, t_philo *philo)
 	start = get_current_time();
 	while (get_current_time() - start < millis)
 	{
-		if (*philo->is_dead)
+		if (*philo->a_dead_philo)
 			break ;
 		usleep(500);
 	}
@@ -74,6 +47,8 @@ void	print_msg(char *str, t_philo *philo)
 
 	time = get_current_time() - philo->start_time;
 	pthread_mutex_lock(philo->printing_key);
+	pthread_mutex_lock(philo->is_dead_key);
 	printf("%lu %lu %s\n", time, philo->id, str);
+	pthread_mutex_unlock(philo->is_dead_key);
 	pthread_mutex_unlock(philo->printing_key);
 }

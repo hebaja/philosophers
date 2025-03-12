@@ -18,7 +18,7 @@ int	philos_alive(t_philo *philo)
 
 	res = 1;
 	pthread_mutex_lock(philo->is_dead_key);
-	if (*philo->is_dead)
+	if (*philo->a_dead_philo)
 		res = 0;
 	pthread_mutex_unlock(philo->is_dead_key);
 	return (res);
@@ -43,7 +43,7 @@ void	*philo_routine(void *philo_ptr)
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
-		usleep(20);
+		usleep(200);
 	while (philos_alive(philo))
 	{
 		if (!philos_alive(philo) || (philo->nbr_times_to_eat != 0

@@ -30,7 +30,7 @@ typedef struct s_philo
 	useconds_t		time_to_die;
 	int				nbr_philos;
 	int				is_eating;
-	int				*is_dead;
+	int				*a_dead_philo;
 	int				dead;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
