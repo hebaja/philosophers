@@ -36,3 +36,13 @@ rethink some variable names.
 test 5 800 200 200 - philosophers shouldn't die but someone dies sometimes
 test 5 800 200 200 7 - philosophers shouldn't die but someone dies sometimes
 test 4 410 200 200 - philosophers shouldn't die but someone dies sometimes
+
+ruler:
+test 1 800 200 200 -> shouldn't eat, must die
+test 5 800 200 200 -> no one dies
+test 5 800 200 200 7 ->  no one dies
+test 4 410 200 200 -> no one dies
+test 4 310 200 100 -> one dies
+* Test 2 previous tests with 2 philosophers
+
+

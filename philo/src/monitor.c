@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:11:49 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/10 23:30:43 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/12 22:52:17 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	dead_monitor(t_philo *philos)
 			philos[i].dead = 1;
 			pthread_mutex_unlock(philos[i].is_dead_key);
 			print_msg("died", &philos[i]);
-			printf("at %lu - last meal: %lu\n", get_current_time() - philos[i].start_time, philos[i].last_time_ate - philos[i].start_time);
 			return (1);
 		}
 	}
@@ -73,8 +72,8 @@ void	*monitor(void *table_ptr)
 	while (1)
 	{
 		if (table->philos[0].nbr_times_to_eat != 0)
-		 	if (philos_ate_enough(table->philos))
-		 		break ;
+			if (philos_ate_enough(table->philos))
+				break ;
 		if (dead_monitor(table->philos))
 			break ;
 	}

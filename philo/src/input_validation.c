@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:11:33 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 16:11:45 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:53:47 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ int	validate_input_args(char **args)
 		|| is_out_bounds(args[1]))
 		write(2, "Invalid time to die\n", 20);
 	else if (ft_atoi(args[3]) <= 0 || !is_valid_args(args[3])
-			|| is_out_bounds(args[1]))
+		|| is_out_bounds(args[1]))
 		write(2, "Invalid time to eat\n", 20);
 	else if (ft_atoi(args[4]) <= 0 || !is_valid_args(args[4])
-			|| is_out_bounds(args[1]))
+		|| is_out_bounds(args[1]))
 		write(2, "Invalid time to sleep\n", 22);
 	else if (args[5] && (ft_atoi(args[5]) <= 0 || !is_valid_args(args[5])
 			|| is_out_bounds(args[1])))

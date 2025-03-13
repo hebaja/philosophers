@@ -6,12 +6,11 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:12:05 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/09 20:40:56 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:47:07 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-#include <pthread.h>
 
 void	set_add_data(int i, t_philo *philos, t_table *table, char **args)
 {

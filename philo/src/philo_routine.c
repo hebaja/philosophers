@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:12:11 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/11 00:08:32 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/12 23:23:44 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	*philo_routine(void *philo_ptr)
 		case_one_philo(philo);
 		return (NULL);
 	}
-	if (philo->id % 2 == 0)
-		usleep(200);
+	if (philo->id % 2 != 0)
+		usleep(10);
 	while (philos_alive(philo))
 	{
 		if (!philos_alive(philo) || (philo->nbr_times_to_eat != 0
-			&& philo->meals_had >= philo->nbr_times_to_eat))
+				&& philo->meals_had >= philo->nbr_times_to_eat))
 			break ;
 		if (!philos_alive(philo))
 			break ;

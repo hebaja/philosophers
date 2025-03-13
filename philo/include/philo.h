@@ -6,16 +6,19 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 20:41:33 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/10 20:56:40 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:52:40 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <pthread.h>
-#include <time.h>
-#include <sys/time.h>
+#ifndef PHILO_H
+# define PHILO_H
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <time.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -56,6 +59,8 @@ void	*monitor(void *table_ptr);
 void	*philo_routine(void *philo_ptr);
 void	init_table(t_table *table);
 void	print_msg(char *str, t_philo *philo);
+void	improved_usleep(size_t millis, t_philo *philo);
+void	clean(t_table *table);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		validate_input_args(char **args);
@@ -65,5 +70,5 @@ int		philos_alive(t_philo *philo);
 int		philo_sleep(t_philo *philo);
 int		philo_think(t_philo *philo);
 int		philo_eat(t_philo *philo);
-void		improved_usleep(size_t millis, t_philo *philo);
-void		clean(t_table *table);
+
+#endif

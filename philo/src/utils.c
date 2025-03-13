@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:12:18 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/10 20:57:20 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:55:19 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,4 @@ void	print_msg(char *str, t_philo *philo)
 	printf("%lu %lu %s\n", time, philo->id, str);
 	pthread_mutex_unlock(philo->is_dead_key);
 	pthread_mutex_unlock(philo->printing_key);
-
 }
