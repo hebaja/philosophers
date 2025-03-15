@@ -43,7 +43,7 @@ void	*philo_routine(void *philo_ptr)
 		return (NULL);
 	}
 	if (philo->id % 2 != 0)
-		usleep(10);
+		usleep(1000);
 	while (philos_alive(philo))
 	{
 		if (!philos_alive(philo) || (philo->nbr_times_to_eat != 0
