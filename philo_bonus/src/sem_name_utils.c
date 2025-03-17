@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sem_name_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 17:49:22 by hebatist          #+#    #+#             */
+/*   Updated: 2025/03/17 18:21:46 by hebatist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo_bonus.h"
 
 int	ft_strlen(const char *s)
 {
-	int     size;
+	int	size;
 
 	size = 0;
 	while (s[size] != '\0')
@@ -10,12 +22,12 @@ int	ft_strlen(const char *s)
 	return (size);
 }
 
-char    *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char    *ptr;
-	int             i;
-	int             len1;
-	int             len2;
+	char		*ptr;
+	int			i;
+	int			len1;
+	int			len2;
 
 	i = -1;
 	len1 = ft_strlen(s1);
@@ -32,9 +44,9 @@ char    *ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-int     get_n_len(int n)
+int	get_n_len(int n)
 {
-	int     len;
+	int	len;
 
 	len = 0;
 	while (n > 0)
@@ -45,9 +57,9 @@ int     get_n_len(int n)
 	return (len);
 }
 
-char    *alloc_str(int n, int *len)
+char	*alloc_str(int n, int *len)
 {
-	char    *str;
+	char	*str;
 
 	if (n < 0)
 		(*len)++;
@@ -55,10 +67,10 @@ char    *alloc_str(int n, int *len)
 	return (str);
 }
 
-char    *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	int             len;
-	char    *str;
+	char	*str;
+	int		len;
 
 	len = get_n_len(n);
 	if (n == 0)

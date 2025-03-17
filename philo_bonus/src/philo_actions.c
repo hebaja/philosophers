@@ -6,65 +6,37 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:46:54 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/12 16:47:01 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:43:10 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo_bonus.h"
 
-void	release_forks(t_philo *philo, int is_both)
+void	philo_think(t_table *table, t_philo *philo)
 {
-	if (is_both)
-	{
-		pthread_mutex_unlock(philo->right_fork);
-		pthread_mutex_unlock(philo->left_fork);
-	}
-	else
-		pthread_mutex_unlock(philo->right_fork);
-}
-
-int	philo_think(t_philo *philo)
-{
-	if (!philos_alive(philo))
-		return (0);
+	if (table->dead_flag)
+		exit(EXIT_FAILURE);
 	print_msg("is thinking", philo);
-	return (1);
 }
 
-// int	philo_sleep(t_philo *philo)
-// {
-// 	if (!philos_alive(philo))
-// 		return (0);
-// 	print_msg("is sleeping", philo);
-// 	improved_usleep(philo->time_to_sleep, philo);
-// 	return (1);
-// }
-
-int	philo_eat(t_philo *philo)
+void	philo_sleep(t_table *table, t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
-	if (!philos_alive(philo))
-	{
-		release_forks(philo, 0);
-		pthread_mutex_unlock(philo->right_fork);
-		return (0);
-	}
-	print_msg("has taken a fork", philo);
-	pthread_mutex_lock(philo->left_fork);
-	if (!philos_alive(philo))
-	{
-		release_forks(philo, 1);
-		return (0);
-	}
-	print_msg("has taken a fork", philo);
+	if (table->dead_flag)
+		exit(EXIT_FAILURE);
+	print_msg("is sleeping", philo);
+	improved_usleep(philo->time_to_sleep, table);
+}
+
+void	philo_eat(t_table *table, t_philo *philo, sem_t *fork_l, sem_t *fork_r)
+{
 	philo->is_eating = 1;
 	print_msg("is eating", philo);
-	pthread_mutex_lock(philo->is_eating_key);
+	sem_wait(table->meal_sem);
 	philo->meals_had++;
-	philo->last_time_ate = get_current_time();
-	pthread_mutex_unlock(philo->is_eating_key);
-	improved_usleep(philo->time_to_eat, philo);
-	release_forks(philo, 1);
+	philo->last_time_meal = get_current_time();
+	sem_post(table->meal_sem);
+	improved_usleep(philo->time_to_eat, table);
+	sem_post(fork_l);
+	sem_post(fork_r);
 	philo->is_eating = 0;
-	return (1);
 }

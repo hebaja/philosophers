@@ -1,5 +1,6 @@
 philo/philo
 philo/tester
+philo_bonus/philo_bonus
 *.swp
 *.out
 *.o
