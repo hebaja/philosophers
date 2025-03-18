@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:11:49 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/12 22:52:17 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/17 23:53:12 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ int	philos_ate_enough(t_philo *philos)
 	nbr_philos = philos[0].nbr_philos;
 	while (++i < nbr_philos)
 	{
+		pthread_mutex_lock(philos[i].is_eating_key);
 		if (philos[i].meals_had < philos->nbr_times_to_eat)
+		{
+			pthread_mutex_unlock(philos[i].is_eating_key);
 			return (0);
+		}
+		pthread_mutex_unlock(philos[i].is_eating_key);
 	}
 	i = -1;
 	return (1);
@@ -76,6 +81,7 @@ void	*monitor(void *table_ptr)
 				break ;
 		if (dead_monitor(table->philos))
 			break ;
+		usleep(1);
 	}
 	return (NULL);
 }
