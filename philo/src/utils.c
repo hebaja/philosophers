@@ -35,13 +35,31 @@ void	improved_usleep(size_t millis, t_philo *philo)
 	start = get_current_time();
 	while (get_current_time() - start < millis)
 	{
-		if (*philo->a_dead_philo)
+		if (!philos_alive(philo))
 			break ;
 		usleep(500);
 	}
 }
 
 void	print_msg(char *str, t_philo *philo)
+{
+	size_t	time;
+
+	time = get_current_time() - philo->start_time;
+	pthread_mutex_lock(philo->printing_key);
+	pthread_mutex_lock(philo->is_dead_key);
+	if (*philo->a_dead_philo)
+	{
+		pthread_mutex_unlock(philo->is_dead_key);
+		pthread_mutex_unlock(philo->printing_key);
+		return ;
+	}
+	printf("%lu %lu %s\n", time, philo->id, str);
+	pthread_mutex_unlock(philo->is_dead_key);
+	pthread_mutex_unlock(philo->printing_key);
+}
+
+void	print_dead_msg(char *str, t_philo *philo)
 {
 	size_t	time;
 

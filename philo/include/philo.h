@@ -20,6 +20,12 @@
 # include <time.h>
 # include <sys/time.h>
 
+typedef struct s_fork
+{
+	size_t				id;
+	pthread_mutex_t		key;
+}	t_fork;
+
 typedef struct s_philo
 {
 	size_t			id;
@@ -35,8 +41,8 @@ typedef struct s_philo
 	int				is_eating;
 	int				*a_dead_philo;
 	int				dead;
-	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*left_fork;
+	t_fork			*right_fork;
+	t_fork			*left_fork;
 	pthread_mutex_t	*is_dead_key;
 	pthread_mutex_t	*is_eating_key;
 	pthread_mutex_t	*printing_key;
@@ -46,7 +52,7 @@ typedef struct s_table
 {
 	pthread_t		table_t;
 	t_philo			*philos;
-	pthread_mutex_t	*forks;
+	t_fork			*forks;
 	pthread_mutex_t	is_dead_key;
 	pthread_mutex_t	is_eating_key;
 	pthread_mutex_t	printing_key;
@@ -59,6 +65,7 @@ void	*monitor(void *table_ptr);
 void	*philo_routine(void *philo_ptr);
 void	init_table(t_table *table);
 void	print_msg(char *str, t_philo *philo);
+void	print_dead_msg(char *str, t_philo *philo);
 void	improved_usleep(size_t millis, t_philo *philo);
 void	clean(t_table *table);
 int		ft_atoi(const char *str);

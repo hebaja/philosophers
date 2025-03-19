@@ -36,6 +36,6 @@ void	init_table(t_table *table)
 		pthread_join(table->philos[i].philo_t, NULL);
 	i = -1;
 	while (++i < table->nbr_philos)
-		pthread_mutex_destroy(&table->forks[i]);
+		pthread_mutex_destroy(&table->forks[i].key);
 	clean(table);
 }

@@ -40,7 +40,7 @@ int	philo_dead(t_philo *philo)
 	pthread_mutex_lock(philo->is_eating_key);
 	current_time = get_current_time();
 	if (current_time - philo->last_time_ate
-		>= philo->time_to_die && philo->is_eating == 0)
+		> philo->time_to_die && philo->is_eating == 0)
 	{
 		pthread_mutex_unlock(philo->is_eating_key);
 		return (1);
@@ -62,7 +62,7 @@ int	dead_monitor(t_philo *philos)
 			*philos[i].a_dead_philo = 1;
 			philos[i].dead = 1;
 			pthread_mutex_unlock(philos[i].is_dead_key);
-			print_msg("died", &philos[i]);
+			print_dead_msg("died", &philos[i]);
 			return (1);
 		}
 	}
@@ -74,7 +74,7 @@ void	*monitor(void *table_ptr)
 	t_table	*table;
 
 	table = (t_table *)table_ptr;
-	while (1)
+	while (philos_alive(&table->philos[0]))
 	{
 		if (table->philos[0].nbr_times_to_eat != 0)
 			if (philos_ate_enough(table->philos))

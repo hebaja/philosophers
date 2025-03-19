@@ -26,10 +26,10 @@ int	philos_alive(t_philo *philo)
 
 void	case_one_philo(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(&philo->right_fork->key);
 	print_msg("has taken a fork", philo);
 	improved_usleep(philo->time_to_die, philo);
-	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(&philo->right_fork->key);
 }
 
 void	*philo_routine(void *philo_ptr)

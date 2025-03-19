@@ -63,22 +63,23 @@ int	build_philos(t_table *table, char **args)
 int	build_forks(t_table *table)
 {
 	int				i;
-	pthread_mutex_t	*forks;
+	t_fork			*forks;
 
 	i = -1;
-	forks = (pthread_mutex_t *)malloc(
-			sizeof(pthread_mutex_t) * table->nbr_philos);
+	forks = (t_fork *)malloc(
+			sizeof(t_fork) * table->nbr_philos);
 	if (!forks)
 		return (0);
 	while (++i < table->nbr_philos)
 	{
-		if (pthread_mutex_init(&forks[i], NULL) != 0)
+		if (pthread_mutex_init(&forks[i].key, NULL) != 0)
 		{
 			while (--i >= 0)
-				pthread_mutex_destroy(&forks[i]);
+				pthread_mutex_destroy(&forks[i].key);
 			free(forks);
 			return (0);
 		}
+		forks[i].id = i + 1;
 	}
 	table->forks = forks;
 	return (1);
