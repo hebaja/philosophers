@@ -41,10 +41,12 @@ void	improved_usleep(size_t millis, t_table *table)
 	}
 }
 
-void	print_msg(char *str, t_philo *philo)
+void	print_msg(char *str, t_table *table, t_philo *philo)
 {
 	size_t	time;
 
+	if (table->dead_flag)
+		return ;
 	time = get_current_time() - philo->start_time;
 	printf("%lu %lu %s\n", time, philo->id, str);
 }
@@ -55,8 +57,8 @@ void	print_dead_msg(char *str, t_table *table, t_philo *philo)
 
 	time = get_current_time() - philo->start_time;
 	sem_wait(table->print_sem);
-	if (table->dead_flag)
-		usleep(1000);
+	// if (table->dead_flag)
+	// 	usleep(1000);
 	printf("%lu %lu %s\n", time, philo->id, str);
 	sem_post(table->print_sem);
 }

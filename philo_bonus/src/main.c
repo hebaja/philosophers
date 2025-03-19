@@ -12,24 +12,12 @@
 
 #include "../include/philo_bonus.h"
 
-void	pre_delete_files(int len)
+void	pre_delete_files(void)
 {
-	int		i;
-	char	*end;
-	char	*name;
-
-	i = -1;
 	sem_unlink("/print");
 	sem_unlink("/meal");
 	sem_unlink("/dead");
-	while (++i < len)
-	{
-		end = ft_itoa(i);
-		name = ft_strjoin("/fork", ft_itoa(i));
-		sem_unlink(name);
-		free(end);
-		free(name);
-	}
+	sem_unlink("/forks");
 }
 
 void	run_table(t_table *table)
@@ -70,8 +58,8 @@ int	main(int argc, char **argv)
 			return (EXIT_FAILURE);
 		if (!table.pids)
 			exit(EXIT_FAILURE);
-		pre_delete_files(table.philos_len);
-		if (!build_forks(&table) || !build_philos(&table, argv))
+		pre_delete_files();
+		if (!build_philos(&table, argv))
 		{
 			clean_table(&table);
 			exit(EXIT_FAILURE);

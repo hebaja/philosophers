@@ -19,7 +19,7 @@ int	philo_is_dead(t_table *table, t_philo *philo)
 	sem_wait(table->meal_sem);
 	current_time = get_current_time();
 	if (current_time - philo->last_time_meal
-		>= philo->time_to_die && philo->is_eating == 0)
+		> philo->time_to_die && philo->is_eating == 0)
 	{
 		if (table->dead_flag)
 			return (0);

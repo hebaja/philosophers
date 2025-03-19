@@ -14,6 +14,7 @@
 
 void	case_one_philo(t_table *table, t_philo *philo)
 {
+	sem_post(table->forks_sem);
 	improved_usleep(philo->time_to_die, table);
 	philo->dead = 1;
 	*philo->dead_flag = 1;
@@ -21,38 +22,26 @@ void	case_one_philo(t_table *table, t_philo *philo)
 	exit(EXIT_FAILURE);
 }
 
-void	case_philo_dies(sem_t *fork_l, sem_t *fork_r, int both)
+void	philo_act(t_table *table, t_philo *philo)
 {
-	if (both)
-	{
-		sem_post(fork_l);
-		sem_post(fork_r);
-	}
-	else
-		sem_post(fork_l);
-	exit(EXIT_FAILURE);
-}
-
-void	philo_act(t_table *table, t_philo *philo, sem_t *fork_l, sem_t *fork_r)
-{
-	sem_wait(fork_l);
-	print_msg("took a fork", philo);
+	sem_wait(table->forks_sem);
+	print_msg("has taken a fork", philo);
 	if (table->philos_len == 1)
 		case_one_philo(table, philo);
-	sem_wait(fork_r);
+	sem_wait(table->forks_sem);
 	if (philo_is_dead(table, philo) || table->dead_flag)
-		case_philo_dies(fork_l, fork_r, 1);
-	print_msg("took a fork", philo);
-	philo_eat(table, philo, fork_l, fork_r);
+	{
+		sem_post(table->forks_sem);
+		sem_post(table->forks_sem);
+	}
+	print_msg("has taken a fork", philo);
+	philo_eat(table, philo);
 	philo_sleep(table, philo);
 	philo_think(table, philo);
 }
 
 int	philo_process(int i, t_table *table, t_philo *philo)
 {
-	sem_t	*fork_l;
-	sem_t	*fork_r;
-
 	if (i % 2 == 0)
 		usleep(1000);
 	while (1)
@@ -62,12 +51,7 @@ int	philo_process(int i, t_table *table, t_philo *philo)
 		if (philo->times_to_eat_len != 0
 			&& (philo->meals_had == philo->times_to_eat_len))
 			break ;
-		fork_l = table->forks[i].sem;
-		if (i == 0)
-			fork_r = table->forks[table->philos_len - 1].sem;
-		else
-			fork_r = table->forks[i - 1].sem;
-		philo_act(table, philo, fork_l, fork_r);
+		philo_act(table, philo);
 	}
 	exit(EXIT_SUCCESS);
 }

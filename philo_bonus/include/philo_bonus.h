@@ -23,13 +23,6 @@
 # include <sys/time.h>
 # include <sys/wait.h>
 
-typedef struct s_fork
-{
-	size_t	id;
-	char	*sem_name;
-	sem_t	*sem;
-}	t_fork;
-
 typedef struct s_philo
 {
 	size_t			id;
@@ -55,11 +48,12 @@ typedef struct s_table
 	char		*print_sem_name;
 	char		*meal_sem_name;
 	char		*dead_sem_name;
+	char		*forks_sem_name;
 	sem_t		*print_sem;
 	sem_t		*meal_sem;
 	sem_t		*dead_sem;
+	sem_t		*forks_sem;
 	size_t		start_time;
-	t_fork		*forks;
 	t_philo		*philos;
 }	t_table;
 
@@ -70,13 +64,14 @@ void	improved_usleep(size_t millis, t_table *table);
 void	clean(t_table *table);
 void	philo_think(t_table *table, t_philo *philo);
 void	philo_sleep(t_table *table, t_philo *philo);
-void	philo_eat(t_table *table, t_philo *philo, sem_t *fork_l, sem_t *fork_r);
-void	clean_forks(t_fork *forks, int forks_len);
+void	philo_eat(t_table *table, t_philo *philo);
+void	clean_forks(sem_t *forks, int forks_len);
 void	clean_table(t_table *table);
 void	print_msg(char *str, t_philo *philo);
 void	print_dead_msg(char *str, t_table *table, t_philo *philo);
 int		build_table(t_table *table, char **args);
 int		philo_process(int i, t_table *table, t_philo *philo);
+// int		philo_process(t_table *table, t_philo *philo);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		validate_input_args(char **args);

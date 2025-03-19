@@ -14,20 +14,20 @@
 
 void	philo_think(t_table *table, t_philo *philo)
 {
-	if (table->dead_flag)
-		exit(EXIT_FAILURE);
+	size_t	time_to_think;
+
+	time_to_think = (philo->time_to_eat * table->philos_len) / 3;
 	print_msg("is thinking", philo);
+	usleep(time_to_think);
 }
 
 void	philo_sleep(t_table *table, t_philo *philo)
 {
-	if (table->dead_flag)
-		exit(EXIT_FAILURE);
 	print_msg("is sleeping", philo);
 	improved_usleep(philo->time_to_sleep, table);
 }
 
-void	philo_eat(t_table *table, t_philo *philo, sem_t *fork_l, sem_t *fork_r)
+void	philo_eat(t_table *table, t_philo *philo)
 {
 	philo->is_eating = 1;
 	print_msg("is eating", philo);
@@ -36,7 +36,7 @@ void	philo_eat(t_table *table, t_philo *philo, sem_t *fork_l, sem_t *fork_r)
 	philo->last_time_meal = get_current_time();
 	sem_post(table->meal_sem);
 	improved_usleep(philo->time_to_eat, table);
-	sem_post(fork_l);
-	sem_post(fork_r);
+	sem_post(table->forks_sem);
+	sem_post(table->forks_sem);
 	philo->is_eating = 0;
 }

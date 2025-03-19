@@ -4,7 +4,7 @@ NAME=libphilo.a
 EXEC_NAME=philo_bonus
 INC_DIR=include
 SRC_DIR=src
-SRC_FILES=table_build.c input_validation.c main.c philo_actions.c philo_build.c philo_process.c sem_name_utils.c utils.c
+SRC_FILES=table_build.c input_validation.c main.c philo_actions.c philo_build.c philo_process.c utils.c
 SRCS=$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS=$(SRCS:.c=.o)
 
