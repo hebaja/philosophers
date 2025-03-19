@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 20:41:33 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/12 21:52:40 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:23:30 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 
 typedef struct s_fork
 {
-	size_t				id;
 	pthread_mutex_t		key;
+	size_t				id;
+	int					locked;
 }	t_fork;
 
 typedef struct s_philo

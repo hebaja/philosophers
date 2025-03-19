@@ -24,6 +24,12 @@ fclean: clean
 	rm -f $(NAME)
 	rm -f $(EXEC_NAME)
 
+helgrind:
+	valgrind --tool=helgrind ./${EXEC_NAME} ${args}
+
+deadlock:
+	valgrind --tool=drd ./${EXEC_NAME} ${args}
+
 re: fclean all
 
 .PHONY: all clean fclean re

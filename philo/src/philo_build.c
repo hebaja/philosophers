@@ -6,7 +6,7 @@
 /*   By: hebatist <hebatist@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:12:05 by hebatist          #+#    #+#             */
-/*   Updated: 2025/03/12 16:47:07 by hebatist         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:16:26 by hebatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	build_forks(t_table *table)
 			return (0);
 		}
 		forks[i].id = i + 1;
+		forks[i].locked = 0;
 	}
 	table->forks = forks;
 	return (1);
