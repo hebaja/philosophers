@@ -14,9 +14,13 @@
 
 int	philo_think(t_philo *philo)
 {
+	size_t  time_to_think;
+
+	time_to_think = (philo->time_to_eat * philo->nbr_philos) / 3;
 	if (!philos_alive(philo))
 		return (0);
 	print_msg("is thinking", philo);
+	usleep(time_to_think);
 	return (1);
 }
 
